@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog.API", "BookCatalog.API\BookCatalog.API.csproj", "{97B09185-FAFF-47DD-9381-19EA2EDC4342}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A0FEBEC-B233-484F-A1E3-03800CFD8673}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97B09185-FAFF-47DD-9381-19EA2EDC4342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B09185-FAFF-47DD-9381-19EA2EDC4342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B09185-FAFF-47DD-9381-19EA2EDC4342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B09185-FAFF-47DD-9381-19EA2EDC4342}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
