@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookCatalog.Infrastructure.Repositories;
 
-public class GenreRepository : IRepository<Genre>
+public class GenreRepository : IGenreRepository
 {
     private readonly AppDbContext _context;
     private readonly DbSet<Genre>  _dbSet;
