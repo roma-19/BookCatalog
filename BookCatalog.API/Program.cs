@@ -1,3 +1,4 @@
+using BookCatalog.Application.Mapping;
 using BookCatalog.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -20,6 +21,8 @@ public class Program
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookCatalog API", Version = "v1"});
         });
+
+        builder.Services.AddAutoMapper(typeof(MappingProfile));
 
         var app = builder.Build();
         
