@@ -14,15 +14,12 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         
-        string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        builder.Services.AddDbContext<AppDbContext>(option => option.UseNpgsql(connectionString));
-        
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookCatalog API", Version = "v1"});
         });
-
-        builder.Services.AddAutoMapper(typeof(MappingProfile));
+        
+        builder.Services.AddServices(builder.Configuration);
 
         var app = builder.Build();
         
