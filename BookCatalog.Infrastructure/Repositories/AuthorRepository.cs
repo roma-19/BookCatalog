@@ -7,37 +7,35 @@ namespace BookCatalog.Infrastructure.Repositories;
 public class AuthorRepository : IAuthorRepository
 {
     private readonly AppDbContext _context;
-    private readonly DbSet<Author>  _dbSet;
-     
+
     public AuthorRepository(AppDbContext context)
     {
         _context = context;
-        _dbSet = context.Set<Author>();
     }
-    
-    public async Task<IEnumerable<Author>> GetAllAsync()
+
+    public async Task<List<Author>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await _context.Authors.ToListAsync();
     }
 
     public async Task<Author?> GetByIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task CreateAsync(Author entity)
     {
-        await _dbSet.AddAsync(entity);
+        await _context.Authors.AddAsync(entity);
     }
 
-    public void UpdateAsync(Author entity)
+    public void Update(Author entity)
     {
-        _dbSet.Update(entity);
+        _context.Authors.Update(entity);
     }
 
-    public void DeleteAsync(Author entity)
+    public void Delete(Author entity)
     {
-        _dbSet.Remove(entity);
+        _context.Authors.Remove(entity);
     }
 
     public async Task SaveChangesAsync()

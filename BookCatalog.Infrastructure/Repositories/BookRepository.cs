@@ -7,37 +7,43 @@ namespace BookCatalog.Infrastructure.Repositories;
 public class BookRepository :  IBookRepository
 {
     private readonly AppDbContext _context;
-    private readonly DbSet<Book>  _dbSet;
      
     public BookRepository(AppDbContext context)
     {
         _context = context;
-        _dbSet = context.Set<Book>();
     }
     
-    public async Task<IEnumerable<Book>> GetAllAsync()
+    public async Task<List<Book>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await _context.Books
+            .Include(b => b.Genre)
+            .Include(b => b.Author)
+            .Include(b => b.Publisher)
+            .ToListAsync();
     }
 
     public async Task<Book?> GetByIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _context.Books
+            .Include(b => b.Genre)
+            .Include(b => b.Author)
+            .Include(b => b.Publisher)
+            .FirstOrDefaultAsync(b => b.Id == id);
     }
 
     public async Task CreateAsync(Book entity)
     {
-        await _dbSet.AddAsync(entity);
+        await _context.Books.AddAsync(entity);
     }
 
-    public void UpdateAsync(Book entity)
+    public void Update(Book entity)
     {
-        _dbSet.Update(entity);
+        _context.Books.Update(entity);
     }
 
-    public void DeleteAsync(Book entity)
+    public void Delete(Book entity)
     {
-        _dbSet.Remove(entity);
+        _context.Books.Remove(entity);
     }
 
     public async Task SaveChangesAsync()

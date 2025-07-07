@@ -7,37 +7,35 @@ namespace BookCatalog.Infrastructure.Repositories;
 public class PublisherRepository : IPublisherRepository
 {
     private readonly AppDbContext _context;
-    private readonly DbSet<Publisher>  _dbSet;
-     
+
     public PublisherRepository(AppDbContext context)
     {
         _context = context;
-        _dbSet = context.Set<Publisher>();
     }
-    
-    public async Task<IEnumerable<Publisher>> GetAllAsync()
+
+    public async Task<List<Publisher>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await _context.Publishers.ToListAsync();
     }
 
     public async Task<Publisher?> GetByIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _context.Publishers.FirstOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task CreateAsync(Publisher entity)
     {
-        await _dbSet.AddAsync(entity);
+        await _context.Publishers.AddAsync(entity);
     }
 
-    public void UpdateAsync(Publisher entity)
+    public void Update(Publisher entity)
     {
-        _dbSet.Update(entity);
+        _context.Publishers.Update(entity);
     }
 
-    public void DeleteAsync(Publisher entity)
+    public void Delete(Publisher entity)
     {
-        _dbSet.Remove(entity);
+        _context.Publishers.Remove(entity);
     }
 
     public async Task SaveChangesAsync()

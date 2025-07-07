@@ -7,37 +7,35 @@ namespace BookCatalog.Infrastructure.Repositories;
 public class GenreRepository : IGenreRepository
 {
     private readonly AppDbContext _context;
-    private readonly DbSet<Genre>  _dbSet;
-     
+
     public GenreRepository(AppDbContext context)
     {
         _context = context;
-        _dbSet = context.Set<Genre>();
     }
-    
-    public async Task<IEnumerable<Genre>> GetAllAsync()
+
+    public async Task<List<Genre>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await _context.Genres.ToListAsync();
     }
 
     public async Task<Genre?> GetByIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _context.Genres.FirstOrDefaultAsync(g => g.Id == id);
     }
 
     public async Task CreateAsync(Genre entity)
     {
-        await _dbSet.AddAsync(entity);
+        await _context.Genres.AddAsync(entity);
     }
 
-    public void UpdateAsync(Genre entity)
+    public void Update(Genre entity)
     {
-        _dbSet.Update(entity);
+        _context.Genres.Update(entity);
     }
 
-    public void DeleteAsync(Genre entity)
+    public void Delete(Genre entity)
     {
-        _dbSet.Remove(entity);
+        _context.Genres.Remove(entity);
     }
 
     public async Task SaveChangesAsync()
