@@ -8,6 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["BookCatalog.API/BookCatalog.API.csproj", "BookCatalog.API/"]
+COPY ["BookCatalog.Infrastructure/BookCatalog.Infrastructure.csproj", "BookCatalog.Infrastructure/"]
+COPY ["BookCatalog.Domain/BookCatalog.Domain.csproj", "BookCatalog.Domain/"]
+COPY ["BookCatalog.Application/BookCatalog.Application.csproj", "BookCatalog.Application/"]
 RUN dotnet restore "BookCatalog.API/BookCatalog.API.csproj"
 COPY . .
 WORKDIR "/src/BookCatalog.API"

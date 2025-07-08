@@ -1,3 +1,5 @@
+using BookCatalog.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace BookCatalog.API;
@@ -28,6 +30,12 @@ public static class Program
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookCatalog API v1");
                 c.RoutePrefix = string.Empty;
             });
+        }
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            dbContext.Database.Migrate();
         }
 
         app.UseHttpsRedirection();
