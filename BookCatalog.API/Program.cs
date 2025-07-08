@@ -1,11 +1,8 @@
-using BookCatalog.Application.Mapping;
-using BookCatalog.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace BookCatalog.API;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {

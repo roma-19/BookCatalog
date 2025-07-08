@@ -19,7 +19,13 @@ public class MappingProfile : Profile
         
         CreateMap<CreateBookRequestDto, Book>();
         CreateMap<UpdateBookRequestDto, Book>();
-        CreateMap<Book, BookResponseDto>();
+        CreateMap<Book, BookResponseDto>()
+            .ForMember(dest => dest.AuthorName, 
+                opt => opt.MapFrom(src => $"{src.Author.FirstName} {src.Author.LastName}"))
+            .ForMember(dest => dest.GenreName, 
+                opt => opt.MapFrom(src => src.Genre.Name))
+            .ForMember(dest => dest.PublisherName, 
+                opt => opt.MapFrom(src => src.Publisher.Name));
         
         CreateMap<CreateGenreRequestDto, Genre>();
         CreateMap<UpdateGenreRequestDto, Genre>();
